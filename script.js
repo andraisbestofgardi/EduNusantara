@@ -211,55 +211,90 @@ function openViewer(name, meta) {
     html += `<p style="color:var(--muted);font-size:.9rem;margin-bottom:20px;line-height:1.6">${meta}</p>`;
   }
 
+  const hasPDF = !!PDF_MAP[name];
   html += `
     <div class="viewer-download-box">
-      <div class="dbox-icon">📄</div>
-      <h4>Materi Lengkap Tersedia</h4>
-      <p>Unduh file PDF berisi materi lengkap, contoh soal, dan pembahasan untuk <strong style="color:var(--text)">${name}</strong></p>
-      <button class="dbox-btn" id="viewerDownloadBtn">⬇ Unduh PDF — ${name}.pdf</button>
+      <div class="dbox-icon">${hasPDF ? '📄' : '🔜'}</div>
+      <h4>${hasPDF ? 'PDF Lengkap Tersedia' : 'Materi Segera Tersedia'}</h4>
+      <p>${hasPDF
+        ? `Unduh file PDF berisi materi lengkap, contoh soal, dan pembahasan untuk <strong style="color:var(--text)">${name}</strong>`
+        : `PDF untuk <strong style="color:var(--text)">${name}</strong> sedang dalam persiapan. Segera tersedia!`
+      }</p>
+      <button class="dbox-btn" id="viewerDownloadBtn" ${!hasPDF ? 'disabled style="opacity:.5;cursor:not-allowed"' : ''}>⬇ Unduh PDF — ${name}.pdf</button>
     </div>`;
 
   bodyEl.innerHTML = html;
 
-  document.getElementById('viewerDownloadBtn').addEventListener('click', () => simulateDownload(name));
+  const dlBtn = document.getElementById('viewerDownloadBtn');
+  dlBtn.addEventListener('click', () => simulateDownload(name));
+
+  // If PDF is available, also add "Open in Browser" button
+  if (PDF_MAP[name]) {
+    const viewBrowserBtn = document.createElement('button');
+    viewBrowserBtn.className = 'dbox-btn';
+    viewBrowserBtn.style.background = 'transparent';
+    viewBrowserBtn.style.border = '1.5px solid var(--kul)';
+    viewBrowserBtn.style.color = 'var(--kul)';
+    viewBrowserBtn.style.marginLeft = '10px';
+    viewBrowserBtn.textContent = '🔍 Buka PDF di Browser';
+    viewBrowserBtn.addEventListener('click', () => window.open(PDF_MAP[name], '_blank'));
+    dlBtn.parentNode.insertBefore(viewBrowserBtn, dlBtn.nextSibling);
+  }
   document.getElementById('modal-viewer').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 
-/* ── DOWNLOAD SIMULATION ──────────────────────────────────────── */
+/* ── PDF FILE MAP ─────────────────────────────────────────────── */
+// Peta nama mata pelajaran ke file PDF yang tersedia di folder yang sama
+const PDF_MAP = {
+  // SD
+  'Matematika SD':            'SD_Matematika.pdf',
+  'IPA SD':                   'SD_IPA.pdf',
+  'Bahasa Indonesia SD':      'SD_Bahasa_Indonesia.pdf',
+  // SMP
+  'Matematika SMP':           'SMP_Matematika.pdf',
+  // SMA
+  'Fisika':                   'SMA_Fisika.pdf',
+  'Kimia':                    'SMA_Kimia.pdf',
+  'Biologi':                  'SMA_Biologi.pdf',
+  'Ekonomi':                  'SMA_Ekonomi.pdf',
+  'Sejarah Indonesia':        'SMA_Sejarah_Indonesia.pdf',
+  // Kuliah
+  'Kalkulus':                 'Kuliah_Kalkulus.pdf',
+  'Informatika & TI':         'Kuliah_Dasar_Pemrograman.pdf',
+  'Dasar Pemrograman':        'Kuliah_Dasar_Pemrograman.pdf',
+};
+
+/* ── DOWNLOAD FUNCTION ────────────────────────────────────────── */
 
 function simulateDownload(name) {
-  const safeName = name.replace(/[^a-zA-Z0-9\s]/g, '').trim().replace(/\s+/g, '-');
-  const text = [
-    '============================================================',
-    `  MATERI: ${name}`,
-    `  EduNusantara — Portal Pendidikan Indonesia`,
-    '============================================================',
-    '',
-    'Ini adalah simulasi file materi.',
-    'Dalam implementasi produksi, file PDF lengkap berisi:',
-    '  • Ringkasan teori setiap bab',
-    '  • Contoh soal bertahap',
-    '  • Pembahasan lengkap',
-    '  • Soal latihan dan kunci jawaban',
-    '',
-    `File: ${safeName}.pdf`,
-    `Diunduh: ${new Date().toLocaleString('id-ID')}`,
-    '',
-    '© 2025 EduNusantara · Gratis untuk semua pelajar Indonesia',
-  ].join('\n');
+  // Cek apakah ada file PDF nyata yang tersedia
+  const pdfFile = PDF_MAP[name];
 
-  const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
-  const url  = URL.createObjectURL(blob);
-  const a    = document.createElement('a');
-  a.href     = url;
-  a.download = safeName + '.txt';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
+  if (pdfFile) {
+    // Download PDF nyata
+    const a = document.createElement('a');
+    a.href     = pdfFile;         // file PDF ada di folder yang sama dengan index.html
+    a.download = pdfFile;
+    a.target   = '_blank';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    showToast(`📄 ${pdfFile} berhasil diunduh!`);
+  } else {
+    // Untuk mata pelajaran yang PDF-nya belum tersedia, tampilkan info
+    showToast(`📄 ${name} — PDF segera tersedia!`);
+  }
+}
 
-  showToast(`📄 ${name}.pdf berhasil diunduh!`);
+/* ── VIEW PDF IN BROWSER ─────────────────────────────────────── */
+function viewPDF(name) {
+  const pdfFile = PDF_MAP[name];
+  if (pdfFile) {
+    window.open(pdfFile, '_blank');
+  } else {
+    openViewer(name, '');
+  }
 }
 
 /* ── TOAST ────────────────────────────────────────────────────── */
