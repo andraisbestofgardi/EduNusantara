@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EduNusantara — Portal Materi Pendidikan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- ── NAVBAR ─────────────────────────────────── -->
+  <nav id="navbar">
+    <div class="logo">EduNusantara</div>
+    <ul class="nav-links">
+      <li><a href="#jenjang">Jenjang</a></li>
+      <li><a href="#cari">Cari Materi</a></li>
+      <li><a href="#fitur">Fitur</a></li>
+      <li><a href="#tentang">Tentang</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#jenjang" onclick="closeMobile()">Jenjang</a>
+    <a href="#cari"    onclick="closeMobile()">Cari Materi</a>
+    <a href="#fitur"   onclick="closeMobile()">Fitur</a>
+    <a href="#tentang" onclick="closeMobile()">Tentang</a>
+  </div>
+
+  <!-- ── HERO ───────────────────────────────────── -->
+  <section id="hero">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <div class="hero-inner">
+      <div class="hero-label">
+        <span class="pulse-dot"></span>
+        Portal Pendidikan Indonesia
+      </div>
+
+      <h1>
+        <span class="line-1">Belajar Tanpa</span>
+        <span class="line-2">Batas.</span>
+      </h1>
+
+      <p class="hero-sub">
+        Akses ribuan materi pelajaran dari SD hingga Perguruan Tinggi.<br>
+        Lihat langsung atau unduh — <strong>gratis, mudah, lengkap.</strong>
+      </p>
+
+      <div class="hero-cta">
+        <a href="#jenjang" class="btn btn-primary">Mulai Belajar →</a>
+        <a href="#cari"    class="btn btn-outline">Cari Materi</a>
+      </div>
+
+      <div class="hero-badges">
+        <div class="badge"><span class="badge-dot" style="background:var(--sd)"></span>Sekolah Dasar</div>
+        <div class="badge"><span class="badge-dot" style="background:var(--smp)"></span>SMP / MTs</div>
+        <div class="badge"><span class="badge-dot" style="background:var(--sma)"></span>SMA / SMK</div>
+        <div class="badge"><span class="badge-dot" style="background:var(--kul)"></span>Perguruan Tinggi</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── STATS ──────────────────────────────────── -->
+  <div class="stats-bar" id="statsBar">
+    <div class="stat"><div class="stat-num" data-target="500">0</div><div class="stat-label">Mata Pelajaran</div></div>
+    <div class="stat"><div class="stat-num" data-target="12000">0</div><div class="stat-label">Materi Tersedia</div></div>
+    <div class="stat"><div class="stat-num" data-target="4">0</div><div class="stat-label">Jenjang Pendidikan</div></div>
+    <div class="stat"><div class="stat-num" data-target="98">0</div><div class="stat-label">% Gratis</div></div>
+  </div>
+
+  <!-- ── JENJANG ────────────────────────────────── -->
+  <section id="jenjang" class="jenjang-section">
+    <div class="section-header reveal">
+      <h2 class="section-title">Pilih <span class="accent-green">Jenjang</span> Pendidikan</h2>
+      <p class="section-sub">Klik kartu jenjang untuk melihat semua mata pelajaran tersedia</p>
+    </div>
+    <div class="jenjang-grid">
+
+      <div class="jenjang-card sd reveal" data-jenjang="sd">
+        <div class="card-stripe"></div>
+        <div class="card-top">
+          <div class="card-icon">🏫</div>
+          <div class="card-title">Sekolah Dasar</div>
+          <div class="card-kelas">Kelas 1 – 6</div>
+          <p class="card-desc">Fondasi ilmu pengetahuan dasar untuk membentuk generasi yang cerdas dan berkarakter.</p>
+        </div>
+        <div class="mapel-list" id="chips-sd"></div>
+        <div class="card-action">
+          <button class="btn-view" data-jenjang="sd">👁 Lihat Materi</button>
+          <button class="btn-dl"   data-jenjang="sd">⬇ Unduh Semua</button>
+        </div>
+      </div>
+
+      <div class="jenjang-card smp reveal" data-jenjang="smp">
+        <div class="card-stripe"></div>
+        <div class="card-top">
+          <div class="card-icon">📚</div>
+          <div class="card-title">SMP / MTs</div>
+          <div class="card-kelas">Kelas 7 – 9</div>
+          <p class="card-desc">Pengembangan konsep ilmu dan pemikiran kritis menuju jenjang yang lebih tinggi.</p>
+        </div>
+        <div class="mapel-list" id="chips-smp"></div>
+        <div class="card-action">
+          <button class="btn-view" data-jenjang="smp">👁 Lihat Materi</button>
+          <button class="btn-dl"   data-jenjang="smp">⬇ Unduh Semua</button>
+        </div>
+      </div>
+
+      <div class="jenjang-card sma reveal" data-jenjang="sma">
+        <div class="card-stripe"></div>
+        <div class="card-top">
+          <div class="card-icon">🎓</div>
+          <div class="card-title">SMA / SMK</div>
+          <div class="card-kelas">Kelas 10 – 12</div>
+          <p class="card-desc">Program IPA, IPS dan kejuruan lengkap sebagai persiapan menuju masa depan cemerlang.</p>
+        </div>
+        <div class="mapel-list" id="chips-sma"></div>
+        <div class="card-action">
+          <button class="btn-view" data-jenjang="sma">👁 Lihat Materi</button>
+          <button class="btn-dl"   data-jenjang="sma">⬇ Unduh Semua</button>
+        </div>
+      </div>
+
+      <div class="jenjang-card kul reveal" data-jenjang="kul">
+        <div class="card-stripe"></div>
+        <div class="card-top">
+          <div class="card-icon">🏛️</div>
+          <div class="card-title">Perguruan Tinggi</div>
+          <div class="card-kelas">D3 · S1 · S2</div>
+          <p class="card-desc">Berbagai jurusan dan bidang ilmu universitas untuk memperdalam keahlian profesional.</p>
+        </div>
+        <div class="mapel-list" id="chips-kul"></div>
+        <div class="card-action">
+          <button class="btn-view" data-jenjang="kul">👁 Lihat Materi</button>
+          <button class="btn-dl"   data-jenjang="kul">⬇ Unduh Semua</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── SEARCH ─────────────────────────────────── -->
+  <section id="cari" class="search-section">
+    <div class="section-header reveal">
+      <h2 class="section-title">Cari <span class="accent-yellow">Materi</span></h2>
+      <p class="section-sub">Ketik nama mata pelajaran atau topik yang ingin dipelajari</p>
+    </div>
+    <div class="search-wrap reveal">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Contoh: Matematika, Fisika, Hukum Perdata..." autocomplete="off">
+    </div>
+    <div id="search-results"></div>
+  </section>
+
+  <!-- ── FEATURES ───────────────────────────────── -->
+  <section id="fitur" class="features-section">
+    <div class="section-header reveal">
+      <h2 class="section-title">Kenapa <span class="accent-blue">EduNusantara?</span></h2>
+      <p class="section-sub">Platform yang dirancang untuk kemudahan belajar semua kalangan</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card reveal"><div class="feat-icon fi-red">📥</div><h3>Unduh Offline</h3><p>Simpan materi dalam format PDF untuk belajar tanpa koneksi internet kapan saja dan di mana saja.</p></div>
+      <div class="feature-card reveal"><div class="feat-icon fi-yellow">⚡</div><h3>Akses Instan</h3><p>Buka dan baca materi langsung di browser tanpa perlu mendaftar atau login terlebih dahulu.</p></div>
+      <div class="feature-card reveal"><div class="feat-icon fi-green">🗂️</div><h3>Terstruktur Rapi</h3><p>Materi disusun per jenjang, kelas, dan topik sehingga mudah ditemukan dan dipahami.</p></div>
+      <div class="feature-card reveal"><div class="feat-icon fi-blue">🔄</div><h3>Update Berkala</h3><p>Konten diperbarui sesuai kurikulum terbaru Kemendikbud dan perkembangan ilmu pengetahuan.</p></div>
+      <div class="feature-card reveal"><div class="feat-icon fi-red">🌐</div><h3>Multi Jenjang</h3><p>Dari SD hingga S2, semua tersedia dalam satu platform yang terintegrasi dan mudah digunakan.</p></div>
+      <div class="feature-card reveal"><div class="feat-icon fi-green">💯</div><h3>Gratis Selamanya</h3><p>Seluruh materi dapat diakses dan diunduh secara gratis tanpa biaya tersembunyi apapun.</p></div>
+    </div>
+  </section>
+
+  <!-- ── TENTANG ─────────────────────────────────── -->
+  <section id="tentang" class="tentang-section">
+    <div class="tentang-inner reveal">
+      <div class="tentang-text">
+        <div class="hero-label" style="margin-bottom:20px;display:inline-flex"><span class="pulse-dot"></span>Tentang Kami</div>
+        <h2 class="section-title" style="margin-bottom:16px">Misi Kami untuk <span class="accent-red">Pendidikan</span> Indonesia</h2>
+        <p>EduNusantara hadir dengan misi sederhana: memastikan setiap pelajar Indonesia, dari Sabang sampai Merauke, memiliki akses yang sama terhadap materi pendidikan berkualitas.</p>
+        <p style="margin-top:12px">Kami percaya bahwa pengetahuan adalah hak semua orang, bukan privilege segelintir pihak.</p>
+        <div class="tentang-stats">
+          <div><strong>2020</strong><span>Tahun Berdiri</span></div>
+          <div><strong>34</strong><span>Provinsi Terjangkau</span></div>
+          <div><strong>2 Juta+</strong><span>Pengguna Aktif</span></div>
+        </div>
+      </div>
+      <div class="tentang-visual">
+        <div class="tv-grid">
+          <div class="tv-card" style="--c:var(--sd)">🏫<span>SD</span></div>
+          <div class="tv-card" style="--c:var(--smp)">📚<span>SMP</span></div>
+          <div class="tv-card" style="--c:var(--sma)">🎓<span>SMA</span></div>
+          <div class="tv-card" style="--c:var(--kul)">🏛️<span>Kuliah</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ─────────────────────────────────── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="logo">EduNusantara</div>
+        <p>Portal Materi Pendidikan Indonesia<br>SD · SMP · SMA · Perguruan Tinggi</p>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h4>Jenjang</h4>
+          <a href="#jenjang">Sekolah Dasar</a>
+          <a href="#jenjang">SMP / MTs</a>
+          <a href="#jenjang">SMA / SMK</a>
+          <a href="#jenjang">Perguruan Tinggi</a>
+        </div>
+        <div>
+          <h4>Platform</h4>
+          <a href="#tentang">Tentang Kami</a>
+          <a href="#fitur">Cara Menggunakan</a>
+          <a href="#">Kebijakan Privasi</a>
+          <a href="#">Kontak</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 EduNusantara · Semua materi bersifat edukatif · Gratis untuk semua
+    </div>
+  </footer>
+
+  <!-- ── MODALS ─────────────────────────────────── -->
+  <div class="modal-overlay" id="modal-sd">
+    <div class="modal">
+      <div class="modal-header sd-border">
+        <div class="modal-title" style="color:var(--sd)">🏫 Materi Sekolah Dasar</div>
+        <button class="close-btn" data-close="sd">✕</button>
+      </div>
+      <div class="modal-body"><div class="subject-list" id="list-sd"></div></div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-smp">
+    <div class="modal">
+      <div class="modal-header smp-border">
+        <div class="modal-title" style="color:var(--smp)">📚 Materi SMP / MTs</div>
+        <button class="close-btn" data-close="smp">✕</button>
+      </div>
+      <div class="modal-body"><div class="subject-list" id="list-smp"></div></div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-sma">
+    <div class="modal">
+      <div class="modal-header sma-border">
+        <div class="modal-title" style="color:var(--sma)">🎓 Materi SMA / SMK</div>
+        <button class="close-btn" data-close="sma">✕</button>
+      </div>
+      <div class="modal-body"><div class="subject-list" id="list-sma"></div></div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-kul">
+    <div class="modal">
+      <div class="modal-header kul-border">
+        <div class="modal-title" style="color:var(--kul)">🏛️ Materi Perguruan Tinggi</div>
+        <button class="close-btn" data-close="kul">✕</button>
+      </div>
+      <div class="modal-body"><div class="subject-list" id="list-kul"></div></div>
+    </div>
+  </div>
+
+  <!-- Viewer Modal -->
+  <div class="modal-overlay" id="modal-viewer">
+    <div class="modal modal-wide">
+      <div class="modal-header">
+        <div class="modal-title" id="viewer-title">Materi</div>
+        <button class="close-btn" id="closeViewer">✕</button>
+      </div>
+      <div class="modal-body" id="viewer-body"></div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast">
+    <span class="toast-icon">✅</span>
+    <span id="toast-msg">File berhasil diunduh!</span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
